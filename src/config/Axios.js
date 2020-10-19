@@ -1,15 +1,20 @@
 import Vue from 'vue'
 import axios from 'axios'
+import qs from 'qs'
 // import router from '../router.js'
 import {
   Loading
 } from 'element-ui'
 // 配置请求的跟路径
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+axios.defaults.baseURL = 'http://127.0.0.1'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 var loadingInstace
 // 设置拦截器
 axios.interceptors.request.use(
   request => {
+    if (request.method === 'post') {
+      request.data = qs.stringify(request.data)
+    }
     request.headers.Authorization = window.sessionStorage.getItem('token')
     // element ui Loading方法
     loadingInstace = Loading.service({
@@ -27,6 +32,15 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     loadingInstace.close()
+    const {
+      data: res
+    } = response
+    if (res.code === 200) {
+      res.status = true
+    } else {
+      res.status = false
+    }
+    response.data = res
     return response
   }, error => {
     loadingInstace.close()

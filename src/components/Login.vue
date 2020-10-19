@@ -6,14 +6,14 @@
         <img src="../assets/logo.png" alt="">
       </div>
       <!-- 登录表单区域 -->
-      <el-form label-width="0px" class="login_form">
+      <el-form label-width="0px" class="login_form" ref="loginFormRef" :model="loginForm" :rules="loginFormRules">
         <!-- 用户名 -->
-        <el-form-item prop="username">
-          <el-input prefix-icon="el-icon-s-custom" v-model="params.userName"></el-input>
+        <el-form-item prop="userName">
+          <el-input prefix-icon="el-icon-s-custom" v-model="loginForm.userName"></el-input>
         </el-form-item>
         <!-- 密码 -->
-        <el-form-item prop="password">
-          <el-input prefix-icon="el-icon-lock" type="password" v-model="params.passWord"></el-input>
+        <el-form-item prop="passWord">
+          <el-input prefix-icon="el-icon-lock" type="password" v-model="loginForm.passWord"></el-input>
         </el-form-item>
         <!-- 按钮区域 -->
         <el-form-item class="btns">
@@ -29,21 +29,48 @@
   export default {
     data() {
       return {
-        params: {
+        loginForm: {
           userName: 'admin',
           passWord: '123456'
+        },
+        // 表单验证规则
+        loginFormRules: {
+          userName: [{
+            required: true,
+            message: '请输入用户名',
+            trigger: 'blur'
+          }],
+          passWord: [{
+            required: true,
+            message: '请输入登录密码',
+            trigger: 'blur'
+          }]
         }
       }
     },
     methods: {
       // 登陆
       login() {
-        this.$http.post('/loging', this.params)
-        console.log(this.params)
+        this.$refs.loginFormRef.validate(async valid => {
+          if (!valid) {
+            console.log('数据校验不过')
+            return
+          }
+          const {
+            data: res
+          } = await this.$http.post('/logon/login', this.loginForm)
+          if (res.status) {
+            window.sessionStorage.setItem('token', res.data)
+            // 重定向到主页
+            this.$router.push('/home')
+          } else {
+            this.$message.error(res.msg)
+          }
+        })
       },
       // 重置
       reset() {
-        console.log('重置')
+        this.$refs.loginFormRef.resetFields()
       }
     }
   }
