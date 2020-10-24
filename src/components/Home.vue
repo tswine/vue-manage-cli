@@ -19,6 +19,10 @@
             <i class="el-icon-menu"></i>
             <span slot="title">导航二</span>
           </el-menu-item>
+          <el-menu-item index="/user/list">
+            <i class="el-icon-menu"></i>
+            <span slot="title">用户管理</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <!--右侧内容主体-->
@@ -43,9 +47,16 @@
     },
     methods: {
       // 退出系统
-      logout() {
-        window.sessionStorage.clear()
-        this.$router.push('/login')
+      async logout() {
+        const {
+          data: res
+        } = await this.$http.post('/logon/logout', {})
+        if (res.status) {
+          window.sessionStorage.clear()
+          this.$router.push('/login')
+        } else {
+          this.$message.error(res.msg)
+        }
       },
       // 切换菜单的折叠与展开
       toggleCollapse() {
