@@ -39,7 +39,8 @@ import {
   Checkbox,
   Upload,
   Radio,
-  DatePicker
+  DatePicker,
+  Divider
 } from 'element-ui'
 
 Vue.use(Button)
@@ -79,6 +80,7 @@ Vue.use(Checkbox)
 Vue.use(Upload)
 Vue.use(Radio)
 Vue.use(DatePicker)
+Vue.use(Divider)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
