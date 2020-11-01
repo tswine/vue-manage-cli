@@ -40,7 +40,8 @@ import {
   Upload,
   Radio,
   DatePicker,
-  Divider
+  Divider,
+  Notification
 } from 'element-ui'
 
 Vue.use(Button)
@@ -84,3 +85,4 @@ Vue.use(Divider)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$notify = Notification
