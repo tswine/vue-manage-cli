@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from './components/Login.vue'
-import Home from './components/Home.vue'
-import Welcome from './components/Welcome.vue'
-import UserList from './components/user/List.vue'
+const Login = () => import(/* webpackChunkName: "login" */ './components/Login.vue')
+const Home = () => import(/* webpackChunkName: "home" */ './components/Home.vue')
+const Welcome = () => import(/* webpackChunkName: "home" */ './components/Welcome.vue')
+const UserList = () => import(/* webpackChunkName: "user" */ './components/user/List.vue')
+const RoleList = () => import(/* webpackChunkName: "role" */ './views/role/RoleList.vue')
 
 Vue.use(Router)
 
@@ -26,6 +27,9 @@ const router = new Router({
       }, {
         path: '/user/list',
         component: UserList
+      }, {
+        path: '/role/list',
+        component: RoleList
       }]
     }
   ]

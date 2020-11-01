@@ -23,6 +23,10 @@
             <i class="el-icon-menu"></i>
             <span slot="title">用户管理</span>
           </el-menu-item>
+          <el-menu-item index="/role/list">
+            <i class="el-icon-menu"></i>
+            <span slot="title">权限列表</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <!--右侧内容主体-->
