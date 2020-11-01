@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 面包屑导航区域 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <cli-breadcrumb twoLevelName="用户管理" levelName="用户列表"></cli-breadcrumb>
     <!--卡片视图区域-->
     <el-card>
       <!--搜索区域-->
@@ -140,7 +136,11 @@
 
 <script>
   import tools from '../../tools.js'
+  import CliBreadcrumb from '../../components/views/CliBreadcrumb.vue'
   export default {
+    components: {
+      CliBreadcrumb
+    },
     data() {
       // 登录名不能重复
       var userNameRepeat = async (rule, value, cb) => {

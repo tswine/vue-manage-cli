@@ -1,5 +1,5 @@
 <template>
-  <h1>权限列表</h1>
+  <h1>角色列表</h1>
 </template>
 
 <script>

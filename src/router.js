@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Login = () => import(/* webpackChunkName: "login" */ './components/Login.vue')
-const Home = () => import(/* webpackChunkName: "home" */ './components/Home.vue')
-const Welcome = () => import(/* webpackChunkName: "home" */ './components/Welcome.vue')
-const UserList = () => import(/* webpackChunkName: "user" */ './components/user/List.vue')
+const Login = () => import(/* webpackChunkName: "login" */ './views/Login.vue')
+const Home = () => import(/* webpackChunkName: "home" */ './views/Home.vue')
+const Welcome = () => import(/* webpackChunkName: "home" */ './views/Welcome.vue')
+const UserList = () => import(/* webpackChunkName: "user" */ './views/user/UserList.vue')
 const RoleList = () => import(/* webpackChunkName: "role" */ './views/role/RoleList.vue')
+const PermissionList = () => import(/* webpackChunkName: "role" */ './views/role/PermissionList.vue')
 
 Vue.use(Router)
 
@@ -31,6 +32,9 @@ const router = new Router({
       }, {
         path: '/role/list',
         component: RoleList
+      }, {
+        path: '/permission/list',
+        component: PermissionList
       }]
     }
   ]
